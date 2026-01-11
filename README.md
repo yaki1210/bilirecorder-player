@@ -1,28 +1,25 @@
-# BiliRecorder Player
+# mikufans放映姬
 
-A high-fidelity web player for local BililiveRecorder files with automatic session grouping and danmaku support.
+还原直播观看体验，基于BililiveRecorder录制的原始文件.
 
-## Usage
+## 使用
 
-### Using via GitHub Pages (Recommended)
-You can use this player directly without installing anything by visiting the GitHub Pages deployment of this repository.
+### 通过 GitHub Pages
+无需安装和配置环境，直接使用
+1. 打开 [GitHub Pages URL](https://yaki1210.github.io/bilirecorder-player/) .
+2. 选取BililiveRecorder配置的工作目录
+   - 注意：此程序完全在您的浏览器中运行，使用文件系统访问 API。不会上传任何数据
 
-1. Open the [GitHub Pages URL](https://<your-username>.github.io/<repo-name>/) (replace with your actual URL).
-2. Click "Select Folder" to choose the directory containing your recordings.
-   - Note: This runs entirely in your browser using the File System Access API. No data is uploaded.
+### 本地部署
 
-### Run Locally
+**依赖:** Node.js
 
-If you prefer to run it locally or develop the code:
-
-**Prerequisites:** Node.js
-
-1. Install dependencies:
+1. Install:
    ```bash
    npm install
    ```
 
-2. Run the app:
+2. Run:
    ```bash
    npm run dev
    ```
