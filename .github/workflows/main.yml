@@ -1,0 +1,61 @@
+name: Deploy to GitHub Pages
+
+on:
+  # 监听 main 分支的 push 事件（如果你是 master 分支，请改为 master）
+  push:
+    branches: ["main"]
+
+  # 允许你在 Actions 页面手动点击按钮触发部署
+  workflow_dispatch:
+
+# 设置权限，允许修改 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 并发控制：防止多次 push 导致部署冲突
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # 任务一：构建 (Build)
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (拉取代码)
+        uses: actions/checkout@v4
+
+      - name: Setup Node (安装 Node.js)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm' # 自动缓存 node_modules，下次构建更快
+
+      - name: Install dependencies (安装依赖)
+        # 这里就是你问的 npm install。
+        # npm ci 是 npm install 的服务器专用版，速度更快更稳定
+        run: npm ci 
+
+      - name: Build project (打包项目)
+        # 这里会自动执行 package.json 里的 build 脚本
+        run: npm run build
+
+      - name: Upload artifact (上传打包结果)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # 注意：Vite 默认输出目录是 dist，如果是 create-react-app 可能是 build
+          path: './dist' 
+
+  # 任务二：部署 (Deploy)
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build # 等待 build 任务成功后再执行
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
