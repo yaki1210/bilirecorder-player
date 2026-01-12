@@ -28,7 +28,7 @@ const Home: React.FC<HomeProps> = ({
   const isFileSystemApiSupported = 'showDirectoryPicker' in window;
 
   return (
-    <div className="min-h-screen bg-[#f1f2f3] dark:bg-[#0f0f0f] p-8 flex flex-col items-center transition-colors duration-300 relative">
+    <div className="h-full overflow-y-auto bg-[#f1f2f3] dark:bg-[#0f0f0f] p-8 flex flex-col items-center transition-colors duration-300 relative">
 
       {/* Top Left: Theme Toggle */}
       <button
