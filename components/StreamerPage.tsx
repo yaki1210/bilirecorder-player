@@ -31,7 +31,7 @@ const StreamerPage: React.FC<StreamerPageProps> = ({ streamer, onBack, onSelectS
   }, [streamer.sessions, searchTerm]);
 
   return (
-    <div className="min-h-screen bg-[#f1f2f3] dark:bg-[#0f0f0f] transition-colors duration-300">
+    <div className="h-full overflow-y-auto bg-[#f1f2f3] dark:bg-[#0f0f0f] transition-colors duration-300">
       {/* Header */}
       <div className="sticky top-0 z-20 bg-white dark:bg-gray-800 shadow-sm px-6 py-3 flex items-center justify-between border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-4">
